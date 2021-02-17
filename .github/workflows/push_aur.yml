@@ -34,17 +34,23 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
       - name: Check PKGBUILD
-        uses: ouuan/arch-pkgbuild-builder@013536da10278ac334a5992de467fcbcd9195ddd
+        id: check-pkgbuild
+        uses: ouuan/arch-pkgbuild-builder@446466a090f55a546a2856264b22c17f4d1ae2d2
         with:
           target: pkgbuild
           pkgname: ${{ matrix.pkgname }}
           debug: true
 
       - name: Check .SRCINFO
-        uses: ouuan/arch-pkgbuild-builder@013536da10278ac334a5992de467fcbcd9195ddd
+        uses: ouuan/arch-pkgbuild-builder@446466a090f55a546a2856264b22c17f4d1ae2d2
         with:
           target: srcinfo
           pkgname: ${{ matrix.pkgname }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.pkgname }}-${{ github.run_id }}
+          path: ${{ matrix.pkgname }}/${{ steps.check-pkgbuild.outputs.pkgfile }}
 
       - name: Clone AUR and update
         run: |
