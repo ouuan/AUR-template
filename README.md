@@ -1,5 +1,7 @@
 # AUR-template
 
+[Example](https://github.com/ouuan/AUR-packages)
+
 Manage AUR packages in a GitHub repository, with:
 
 -   CI tests to build the packages in a clean environment, on every push, and also scheduled.
