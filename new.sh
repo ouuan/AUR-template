@@ -23,7 +23,7 @@ depends=('')
 makedepends=('')
 optdepends=('')
 source=(\"\")
-sha256sums=('')
+sha256sums=('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 
 build() {
 
