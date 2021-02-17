@@ -1,0 +1,62 @@
+name: "Update AUR"
+
+on:
+  push:
+  schedule:
+    - cron: "0 0 * * 6"
+
+jobs:
+  generate-matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate matrix
+        id: gen-matrix
+        run: echo "::set-output name=packages::$(ls */ -d | cut -f1 -d'/' | jq -R . | jq -cs .)"
+    outputs:
+      packages: ${{ steps.gen-matrix.outputs.packages }}
+
+  aur:
+    runs-on: ubuntu-latest
+    needs: generate-matrix
+    strategy:
+      fail-fast: false
+      matrix:
+        pkgname: ${{ fromJson(needs.generate-matrix.outputs.packages) }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Check PKGBUILD
+        uses: ouuan/arch-pkgbuild-builder@013536da10278ac334a5992de467fcbcd9195ddd
+        with:
+          target: pkgbuild
+          pkgname: ${{ matrix.pkgname }}
+          debug: true
+
+      - name: Check .SRCINFO
+        uses: ouuan/arch-pkgbuild-builder@013536da10278ac334a5992de467fcbcd9195ddd
+        with:
+          target: srcinfo
+          pkgname: ${{ matrix.pkgname }}
+
+      - name: Clone AUR and update
+        run: |
+          sudo git clean -dfx
+          git clone ssh://aur@aur.archlinux.org/${{ matrix.pkgname }}.git ../aur
+          rm ../aur/* || true
+          cp ${{ matrix.pkgname }}/* ${{ matrix.pkgname }}/.SRCINFO ../aur
+          cd ../aur
+          git config user.name "${{ github.event.head_commit.message.author.name }}"
+          git config user.email "${{ github.event.head_commit.message.author.email }}"
+          git add -A
+          git diff-index @ --exit-code --quiet || git commit -m "Update from GitHub Actions: ${{ github.event.head_commit.message }}
+
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+          git push

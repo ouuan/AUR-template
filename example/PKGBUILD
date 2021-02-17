@@ -1,0 +1,24 @@
+# Maintainer: Your Name <your email>
+
+pkgname=example
+pkgver=0.0.1
+pkgrel=1
+provides=('example')
+conflicts=('example')
+pkgdesc='example'
+arch=('x86_64')
+url='https://example.com'
+license=('example')
+depends=('example')
+makedepends=('example')
+optdepends=('example')
+source=("https://example.com")
+sha256sums=('SKIP')
+
+build() {
+    echo 'build'
+}
+
+package() {
+    echo 'package'
+}
