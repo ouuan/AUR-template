@@ -6,6 +6,7 @@ Manage AUR packages in a GitHub repository, with:
 
 -   CI tests to build the packages in a clean environment, on every push, and also scheduled.
 -   Auto publish to AUR after CI tests are passed.
+-   Upload the packages built in the CI tests to Artifacts.
 -   Scripts to add a new package/update a package.
 
 ## Get Started
