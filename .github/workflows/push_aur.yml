@@ -35,14 +35,14 @@ jobs:
 
       - name: Check PKGBUILD
         id: check-pkgbuild
-        uses: ouuan/arch-pkgbuild-builder@446466a090f55a546a2856264b22c17f4d1ae2d2
+        uses: ouuan/arch-pkgbuild-builder@01cd2af677dca85a92b7b78f831b3bbeb126677c
         with:
           target: pkgbuild
           pkgname: ${{ matrix.pkgname }}
           debug: true
 
       - name: Check .SRCINFO
-        uses: ouuan/arch-pkgbuild-builder@446466a090f55a546a2856264b22c17f4d1ae2d2
+        uses: ouuan/arch-pkgbuild-builder@01cd2af677dca85a92b7b78f831b3bbeb126677c
         with:
           target: srcinfo
           pkgname: ${{ matrix.pkgname }}
