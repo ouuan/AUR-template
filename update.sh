@@ -44,8 +44,8 @@ makepkg --printsrcinfo >.SRCINFO
 
 git clean -dxn
 confirm
-git clean -dxf
 rm -r ./*/src || true
+git clean -dxf
 
 git add -A
 git diff --cached
