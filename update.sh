@@ -44,7 +44,7 @@ makepkg --printsrcinfo >.SRCINFO
 
 git clean -dxn
 confirm
-rm -r ./*/src || true
+rm -r */src || true
 git clean -dxf
 
 git add -A
