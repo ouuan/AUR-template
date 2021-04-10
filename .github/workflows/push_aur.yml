@@ -54,7 +54,7 @@ jobs:
 
       - name: Clone AUR and update
         run: |
-          rm -r src || true
+          rm -r */src || true
           sudo git clean -dfx
           git clone ssh://aur@aur.archlinux.org/${{ matrix.pkgname }}.git ../aur
           rm ../aur/* || true
