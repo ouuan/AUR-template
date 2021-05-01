@@ -31,6 +31,7 @@ git add PKGBUILD .SRCINFO
 
 git clean -dxn
 confirm
+rm -r */src || true
 git clean -dxf
 
 git add -A
