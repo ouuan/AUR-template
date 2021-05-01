@@ -42,9 +42,9 @@ checksums="$(makepkg -g)"
 perl -i -p0e "s/sha256sums=\(['0-9a-z \n]+\)/$checksums/" PKGBUILD
 makepkg --printsrcinfo >.SRCINFO
 
+rm -r src || true
 git clean -dxn
 confirm
-rm -r */src || true
 git clean -dxf
 
 git add -A

@@ -29,9 +29,9 @@ makepkg --printsrcinfo >.SRCINFO
 
 git add PKGBUILD .SRCINFO
 
+rm -r src || true
 git clean -dxn
 confirm
-rm -r */src || true
 git clean -dxf
 
 git add -A
