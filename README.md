@@ -9,6 +9,7 @@ Manage AUR packages in a GitHub repository, with:
 -   Upload the packages built in the CI tests to Artifacts.
 -   Scripts to add a new package/update a package.
 -   Auto-generated `.SRCINFO`.
+-   Warnings provided by `namcap` in the GitHub Actions runs.
 
 ## Get Started
 
