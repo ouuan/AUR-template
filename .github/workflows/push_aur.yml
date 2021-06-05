@@ -26,6 +26,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          depth: 0
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -46,7 +48,7 @@ jobs:
 
       - name: Clone AUR and update
         run: |
-          message=$(git log -n1 --pretty='%B' "${{ matrix.pkgname }}")
+          message="$(git log -n1 --pretty='%B' "${{ matrix.pkgname }}")"
           git clone ssh://aur@aur.archlinux.org/${{ matrix.pkgname }}.git ../aur
           shopt -s dotglob
           cp -r ${{ matrix.pkgname }}/*  ../aur
@@ -54,7 +56,14 @@ jobs:
           git config user.name "${{ github.event.head_commit.author.name }}"
           git config user.email "${{ github.event.head_commit.author.email }}"
           git add -A
+          escape() {
+            local content="$1"
+            content="${content//'%'/'%25'}"
+            content="${content//$'\n'/'%0A'}"
+            content="${content//$'\r'/'%0D'}"
+            echo "$content"
+          }
           git diff-index @ --exit-code --quiet || ( git commit -m "Update from GitHub Actions: $message
 
-          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}" && echo "::warning::Pushed to AUR: ${{ matrix.pkgname }}" )
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}" && echo "::warning::Pushed to AUR:$(escape "\n$message")" )
           git push
