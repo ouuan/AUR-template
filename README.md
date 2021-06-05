@@ -8,6 +8,7 @@ Manage AUR packages in a GitHub repository, with:
 -   Auto publish to AUR after CI tests are passed.
 -   Upload the packages built in the CI tests to Artifacts.
 -   Scripts to add a new package/update a package.
+-   Auto-generated `.SRCINFO`.
 
 ## Get Started
 
