@@ -53,7 +53,7 @@ jobs:
           git config user.name "${{ github.event.head_commit.author.name }}"
           git config user.email "${{ github.event.head_commit.author.email }}"
           git add -A
-          git diff-index @ --exit-code --quiet || { git commit -m "Update from GitHub Actions: $(git log -n1 --pretty='%B' "${{ matrix.pkgname }}")
+          git diff-index @ --exit-code --quiet || ( git commit -m "Update from GitHub Actions: $(git log -n1 --pretty='%B' "${{ matrix.pkgname }}")
 
-          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}" && echo "::warning::Pushed to AUR: ${{ matrix.pkgname }}" }
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}" && echo "::warning::Pushed to AUR: ${{ matrix.pkgname }}" )
           git push
