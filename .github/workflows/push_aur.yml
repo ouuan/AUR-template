@@ -42,7 +42,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.pkgname }}-${{ github.run_id }}
-          path: ${{ matrix.pkgname }}/${{ steps.build-test.outputs.pkgfile }}
+          path: ${{ steps.build-test.outputs.pkgfile }}
 
       - name: Clone AUR and update
         run: |
