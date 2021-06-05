@@ -65,5 +65,5 @@ jobs:
           }
           git diff-index @ --exit-code --quiet || ( git commit -m "Update from GitHub Actions: $message
 
-          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}" && echo "::warning::Pushed to AUR:$(escape "\n$message")" )
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}" && echo "::warning::Pushed to AUR:%0A$(escape "$message")" )
           git push
