@@ -34,31 +34,21 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
       - name: Check PKGBUILD
-        id: check-pkgbuild
-        uses: ouuan/arch-pkgbuild-builder@01cd2af677dca85a92b7b78f831b3bbeb126677c
+        id: build-test
+        uses: ouuan/pkgbuild-action@d64c6b7a3f00d79238ba1ca0d2ecbb9ca96d10ee
         with:
-          target: pkgbuild
-          pkgname: ${{ matrix.pkgname }}
-          debug: true
-
-      - name: Check .SRCINFO
-        uses: ouuan/arch-pkgbuild-builder@01cd2af677dca85a92b7b78f831b3bbeb126677c
-        with:
-          target: srcinfo
-          pkgname: ${{ matrix.pkgname }}
+          path: ${{ matrix.pkgname }}
 
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.pkgname }}-${{ github.run_id }}
-          path: ${{ matrix.pkgname }}/${{ steps.check-pkgbuild.outputs.pkgfile }}
+          path: ${{ matrix.pkgname }}/${{ steps.build-test.outputs.pkgfile }}
 
       - name: Clone AUR and update
         run: |
-          sudo rm -r */src || true
-          sudo git clean -dfx
           git clone ssh://aur@aur.archlinux.org/${{ matrix.pkgname }}.git ../aur
-          rm ../aur/* || true
-          cp -r ${{ matrix.pkgname }}/* ${{ matrix.pkgname }}/.SRCINFO ../aur
+          shopt -s dotglob
+          cp -r ${{ matrix.pkgname }}/*  ../aur
           cd ../aur
           git config user.name "${{ github.event.head_commit.author.name }}"
           git config user.email "${{ github.event.head_commit.author.email }}"
