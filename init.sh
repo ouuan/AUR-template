@@ -23,8 +23,7 @@ cd "$pkg"
 
 source PKGBUILD
 
-checksums="$(makepkg -g)"
-perl -i -p0e "s/sha256sums=\(['0-9a-z \n]+\)/$checksums/" PKGBUILD
+updpkgsums
 
 git add PKGBUILD
 

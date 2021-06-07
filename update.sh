@@ -38,8 +38,7 @@ fi
 
 sed -i "s/pkgver=.\+/pkgver=$ver/" PKGBUILD
 sed -i "s/pkgrel=.\+/pkgrel=$rel/" PKGBUILD
-checksums="$(makepkg -g)"
-perl -i -p0e "s/sha256sums=\(['0-9a-z \n]+\)/$checksums/" PKGBUILD
+updpkgsums
 
 rm -r src || true
 git clean -dxn
