@@ -37,7 +37,7 @@ jobs:
 
       - name: Check PKGBUILD
         id: build-test
-        uses: ouuan/pkgbuild-action@269e171983d144c460f25af8052b436b29f1b46f
+        uses: ouuan/pkgbuild-action@677b7e7bd1c4c3d2c1abf98de29d23004e9bd9cd
         with:
           path: ${{ matrix.pkgname }}
 
