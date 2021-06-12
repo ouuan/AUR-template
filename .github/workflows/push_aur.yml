@@ -53,8 +53,8 @@ jobs:
           shopt -s dotglob
           cp -r ${{ matrix.pkgname }}/*  ../aur
           cd ../aur
-          git config user.name "${{ github.event.head_commit.author.name }}"
-          git config user.email "${{ github.event.head_commit.author.email }}"
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
           git add -A
           escape() {
             local content="$1"
