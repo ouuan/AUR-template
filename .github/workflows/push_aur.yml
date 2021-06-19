@@ -51,6 +51,8 @@ jobs:
           message="$(git log -n1 --pretty='%B' "${{ matrix.pkgname }}")"
           git clone ssh://aur@aur.archlinux.org/${{ matrix.pkgname }}.git ../aur
           shopt -s dotglob
+          shopt -s extglob
+          rm ../aur/!(.git|.|..) || true
           cp -r ${{ matrix.pkgname }}/*  ../aur
           cd ../aur
           git config user.name "GitHub Action"
