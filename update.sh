@@ -19,6 +19,8 @@ else
     pkg="$1"
 fi
 
+git add "$pkg"
+
 cd "$pkg"
 
 source PKGBUILD

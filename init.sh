@@ -19,13 +19,13 @@ else
     pkg="$1"
 fi
 
+git add "$pkg"
+
 cd "$pkg"
 
 source PKGBUILD
 
 updpkgsums
-
-git add PKGBUILD
 
 rm -r src || true
 git clean -dxn
