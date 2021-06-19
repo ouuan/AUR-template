@@ -11,10 +11,7 @@ confirm() {
 }
 
 if [[ "$1" == "" ]]; then
-    echo "Package?"
-    select pkg in $(exa -D); do
-        break
-    done
+    pkg=$(exa -D | fzf --prompt "pkgname to update > " --preview="bat --color=always {}/PKGBUILD")
 else
     pkg="$1"
 fi

@@ -5,7 +5,7 @@ set -eo pipefail
 if [[ -n "$1" ]]; then
     pkgname="$1"
 else
-    read -rp "pkgname? " pkgname
+    pkgname=$(exa -D | fzf --prompt "pkgname to init > " --preview="bat --color=always {}/PKGBUILD")
 fi
 
 git rm -r "$pkgname"
