@@ -14,7 +14,7 @@ Manage AUR packages in a GitHub repository, with:
 ## Get Started
 
 1.  Clone this repository.
-2.  Change the maintainer info in [`new.sh`](new.sh).
+2.  Change the maintainer info in [`config`](config).
 3.  Remove the [example](example) directory.
 4.  Remove things in README except for the [Template](#template) section.
 5.  On GitHub, [set the secrets](https://github.com/shimataro/ssh-key-action#usage).
