@@ -11,6 +11,14 @@ Manage AUR packages in a GitHub repository, with:
 -   Auto-generated `.SRCINFO`.
 -   Warnings provided by `namcap` in the GitHub Actions runs.
 
+## Requirements
+
+The following packages are required in order to use the `*.sh` tools:
+
+```bash
+sudo pacman -S --needed pacman-contrib fzf bat exa
+```
+
 ## Get Started
 
 1.  Clone this repository.
