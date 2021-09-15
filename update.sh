@@ -36,9 +36,9 @@ else
     rel=1
 fi
 
+updpkgsums
 sed -i "s/pkgver=.\+/pkgver=$ver/" PKGBUILD
 sed -i "s/pkgrel=.\+/pkgrel=$rel/" PKGBUILD
-updpkgsums
 
 rm -r src || true
 git clean -dxn

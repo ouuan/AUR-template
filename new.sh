@@ -27,7 +27,7 @@ depends=('')
 makedepends=('')
 optdepends=('')
 source=(\"\")
-sha256sums=('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+sha256sums=('SKIP')
 
 build() {
 
