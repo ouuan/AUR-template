@@ -41,10 +41,20 @@ jobs:
         with:
           path: ${{ matrix.pkgname }}
 
+      - name: Handle epoch
+        id: epoch
+        run: |
+          oldname="${{ steps.build-test.outputs.pkgfile }}"
+          newname="$(echo "$oldname" | sed -e 's/[^A-Za-z0-9._-]/_/g')"
+          if [[ "$oldname" != "$newname" ]]; then
+            mv "$oldname" "$newname"
+          fi
+          echo "::set-output name=pkgfile::$newname"
+
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.pkgname }}-${{ github.run_id }}
-          path: ${{ steps.build-test.outputs.pkgfile }}
+          path: ${{ steps.epoch.outputs.pkgfile }}
 
       - name: Clone AUR and update
         run: |
