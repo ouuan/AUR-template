@@ -34,5 +34,5 @@ git add -A
 git diff --cached
 confirm
 
-git commit -am "$pkg: init at $pkgver" --edit
+git commit -avm "$pkg: init at $pkgver" --edit
 git push

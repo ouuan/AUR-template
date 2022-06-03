@@ -10,5 +10,5 @@ else
 fi
 
 git rm -r "$pkgname"
-git commit -m "disown: $pkgname" --edit
+git commit -vm "disown: $pkgname" --edit
 git push
