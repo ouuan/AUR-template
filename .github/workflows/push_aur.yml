@@ -9,7 +9,7 @@ jobs:
   generate-matrix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Generate matrix
         id: gen-matrix
         run: echo "::set-output name=packages::$(ls */ -d | cut -f1 -d'/' | jq -R . | jq -cs .)"
