@@ -51,7 +51,7 @@ jobs:
           fi
           echo "pkgfile=$newname" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.pkgname }}-${{ github.run_id }}
           path: ${{ steps.epoch.outputs.pkgfile }}
