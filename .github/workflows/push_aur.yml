@@ -9,7 +9,7 @@ jobs:
   generate-matrix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Generate matrix
         id: gen-matrix
         run: echo "packages=$(ls */ -d | cut -f1 -d'/' | jq -R . | jq -cs .)" >> "$GITHUB_OUTPUT"
@@ -25,7 +25,7 @@ jobs:
         pkgname: ${{ fromJson(needs.generate-matrix.outputs.packages) }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -37,7 +37,7 @@ jobs:
 
       - name: Check PKGBUILD
         id: build-test
-        uses: ouuan/pkgbuild-action@v1.1.5
+        uses: ouuan/pkgbuild-action@v1.2.0
         with:
           path: ${{ matrix.pkgname }}
 
@@ -51,7 +51,7 @@ jobs:
           fi
           echo "pkgfile=$newname" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.pkgname }}-${{ github.run_id }}
           path: ${{ steps.epoch.outputs.pkgfile }}
