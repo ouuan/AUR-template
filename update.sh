@@ -49,5 +49,5 @@ git add -A
 git diff --cached
 confirm
 
-git commit -avm "$pkg: update to $ver-$rel" --edit
+git commit -avm "$pkg: update to $ver" --edit
 git push
